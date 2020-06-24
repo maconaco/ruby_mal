@@ -42,7 +42,6 @@ class Tokenizer
   end
 
   def peek
-    puts "peek: @source[#{@index+1}] = #{@source[@index+1]}"
     if @index < @source.length {-1} then
       return @source[@index+1]
     end
@@ -54,7 +53,6 @@ class Tokenizer
     tokens = []
     while @index < @source.length
       c = @source[@index]
-      puts "next loop: @source[#{@index}] = #{@source[@index]}"
 
       next if c.empty?
 
@@ -85,8 +83,3 @@ class Tokenizer
     tokens
   end
 end
-
-
-tokenizer = Tokenizer.new("(+ 10 22 3)", 0)
-puts tokenizer.call
-p tokenizer.tokenize
