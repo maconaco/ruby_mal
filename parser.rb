@@ -1,29 +1,35 @@
+require "./tokenizer"
+
 class Parser
-  attr_accessor :index
-
-  def initialize(index, tok)
+  attr_accessor :index, :tokens
+  def initialize(index, tokens)
     @index = index
-    @tok = tok
+    @tokens = tokens
   end
-  def consume(c)
-    c = @tok
-    c == @tok ? @index+=1 : false
-  end
-
-  def node
+  def node_type
     @index = 0
-    node = case @tok
-      when '+' then :Operator
-      when '*' then :Operator
-      when '-' then :Operator
-      when '/' then :Operator
-      when /[0-9]/ then :Integer
+    case @tokens[@index][:type]
+      when :LPAREN then :LPAREN
+      when :RPAREN then :RPAREN
+      when :OPERATOR then :OPERATOR
+      when :NUMBER then :NUMBER
       else :Unknown
     end
   end
-
+  def curr
+    @index < @tokens.length - @index ? @tokens[@index+1] : ''
+  end
+  def parse_expr
+  end
   def parse
-    if !consume(@tok == '(') then
+    if @tokens[@index][:type] == :LPAREN
+      return {type: :Exprr, val: curr}
     end
+    return {type: :NumberNode, val: @tokens[@index]}
+    if @tokens[@index][:type] == [:RPAREN]
+    end
+  end
+
+  def evaluate
   end
 end

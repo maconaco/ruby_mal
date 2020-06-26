@@ -1,14 +1,16 @@
-require './tokenizer.rb'
-require './parser.rb'
+require "./tokenizer"
+require "./parser"
 
-p "tokenizer --------------------------"
 tokenizer = Tokenizer.new("(+ 10 22 (+ 1 2) 3)", 0)
 puts tokenizer.call
+p "tokenize --------------------------"
 tokens = p tokenizer.tokenize
 
 index = 0
 
-parser = Parser.new(0, "#{tokens[index]}")
+parser = Parser.new(0,tokens)
 
-p "parser --------------------------"
-p parser.node
+p "parse -----------------------------"
+p parser.curr
+p parser.parse
+p "node -----------------------------"
